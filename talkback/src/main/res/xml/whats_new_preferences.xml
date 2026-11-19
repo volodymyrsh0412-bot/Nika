@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <com.google.android.accessibility.material.preference.AccessibilitySuitePreference
+      android:key="whats_new_version"
+      android:title="@string/whats_new_version_title"
+      android:summary="@string/whats_new_version_summary"
+      android:selectable="false" />
+</PreferenceScreen>
