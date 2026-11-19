@@ -44,19 +44,19 @@ jobs:
 
       # AGP downloads the SDK platform and NDK it needs if the runner lacks them.
       - name: Build debug APKs
-        run: ./gradlew assembleDebug --console=plain
+        run: bash ./gradlew assembleDebug --console=plain
 
       # Only the phone flavor: the watch's braille keyboard is a stub, so the braille keyboard's
       # tests don't compile for it, and the rest of the code is shared.
       - name: Run unit tests
-        run: ./gradlew testPhoneDebugUnitTest --console=plain
+        run: bash ./gradlew testPhoneDebugUnitTest --console=plain
 
       # The app's lint also checks the library modules. Issues already in lint-baseline.xml are
       # allowed, so this fails only on new errors, such as a call that needs a newer Android than
       # minSdk without a version check. The watch is linted too: it has code of its own and a
       # higher minSdk, and the baseline covers both.
       - name: Run lint
-        run: ./gradlew :lintPhoneDebug :lintWearDebug --console=plain
+        run: bash ./gradlew :lintPhoneDebug :lintWearDebug --console=plain
 
       - uses: actions/upload-artifact@v7
         if: failure()
@@ -73,7 +73,7 @@ jobs:
       - name: Build the APK without Play services
         run: |
           cp build/outputs/apk/phone/debug/backtalk-phone-debug.apk "$RUNNER_TEMP/"
-          ./gradlew :assemblePhoneDebug -PbundledOcr --console=plain
+          bash ./gradlew :assemblePhoneDebug -PbundledOcr --console=plain
           mkdir -p build/outputs/apk/nogms
           mv build/outputs/apk/phone/debug/backtalk-phone-debug.apk build/outputs/apk/nogms/backtalk-nogms-debug.apk
           cp "$RUNNER_TEMP/backtalk-phone-debug.apk" build/outputs/apk/phone/debug/
